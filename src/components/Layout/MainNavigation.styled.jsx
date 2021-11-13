@@ -10,7 +10,7 @@ export const Header = styled.header`
   background-color: #008080;
 `;
 
-export const logo = styled.div`
+export const Logo = styled.div`
   font-size: 2rem;
   color: white;
 `;

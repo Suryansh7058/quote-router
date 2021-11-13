@@ -10,6 +10,8 @@ const Comments = () => {
     setIsAddingComment(true);
   };
 
+  console.log('In Comments');
+
   return (
     <CommentsSection>
       <h2>User Comments</h2>

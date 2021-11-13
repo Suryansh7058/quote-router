@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 const QuoteItemLi = styled.li`
   margin: 1rem 0;
   padding: 1rem;
@@ -38,22 +38,19 @@ const QuoteItemLi = styled.li`
   }
 `;
 
-export const FullScreenLink = styled.a`
-  cursor: pointer;
-  font: inherit;
-  color: #262c2c;
-  font-size: 3rem;
-  font-weight: bold;
-  border: none;
-  background-color: none;
+export const FullScreenLink = styled(Link)`
   text-decoration: none;
-  padding: 0.75rem 1.5rem;
+  background-color: teal;
+  color: white;
   border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid teal;
+  cursor: pointer;
 
   &:hover,
   &:active {
-    background-color: teal;
-    color: white;
+    background-color: #11acac;
+    border-color: #11acac;
   }
 `;
 

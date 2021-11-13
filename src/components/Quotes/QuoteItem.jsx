@@ -1,4 +1,5 @@
 import QuoteItemLi, { FullScreenLink } from './QuoteItem.styled';
+
 const QuoteItem = (props) => {
   return (
     <QuoteItemLi>
@@ -8,7 +9,7 @@ const QuoteItem = (props) => {
         </blockquote>
         <figcaption>{props.author}</figcaption>
       </figure>
-      <FullScreenLink>View Fullscreen</FullScreenLink>
+      <FullScreenLink to={`/quotes/${props.id}`} >View Fullscreen</FullScreenLink>
     </QuoteItemLi>
   );
 };
