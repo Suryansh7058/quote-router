@@ -15,7 +15,7 @@ const QuoteDetail = () => {
   const quote = DUMMY_QUOTES.find((quote) => quote.id === params.quoteId);
 
   if (!quote) {
-    history.replace('/*');
+    history.push('*');
   }
   return (
     <>
