@@ -3,16 +3,15 @@ import Comments from '../components/Comments/Comments';
 import HighlightedQuote from '../components/Quotes/HighlightedQuote';
 import { StyledLinkFlat } from '../NavLink';
 import { useRouteMatch } from 'react-router';
-const DUMMY_QUOTES = [
-  { id: 'q1', author: 'Suryansh', text: 'Learning React is fun!' },
-  { id: 'q2', author: 'Suryansh Singh', text: 'Learning React is great!' },
-];
+import { useSelector } from 'react-redux';
 
 const QuoteDetail = () => {
   const params = useParams();
+  console.log(params);
   const history = useHistory();
   const match = useRouteMatch();
-  const quote = DUMMY_QUOTES.find((quote) => quote.id === params.quoteId);
+  const allQuotes = useSelector((state) => state.quotes.quotes);
+  const quote = allQuotes.slice().find((quote) => quote.id === +params.quoteId);
 
   if (!quote) {
     history.push('*');

@@ -4,13 +4,31 @@ import QuoteListUl, { Sorting } from './QuoteList.styled';
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 
 const sortQuotes = (quotes, ascending) => {
-  return quotes.sort((quoteA, quoteB) => {
+  //TODO READ THE FOLLOWING COMMENTS
+
+  // Redux Toolkit freezes the object and hence it does not allow modification of the array or any other state outside the reducer hence we should slice() the array since creating a new array like const arr = props.quotesArray will create a reference object hence it will be blocked too so we should use slice() to create a copy of the array
+
+  // * https://github.com/reduxjs/redux-toolkit/issues/839
+  // !immer will still freeze your returned object unless you have already frozen it
+  // ?Why does immer freezes a state (returned from slice) as I know nobody is changing the state. We want to prevent state mutations inside slice, right, why after returning of state?
+  // * in your component:
+  // * const someList = useSelector((state) => state.posts);
+  // *someList.sort(); // this line would mutate your state
+
+  //TODO READ THE ABOVE COMMENTS
+
+  const sortedArray = quotes.slice().sort((quoteA, quoteB) => {
+    const A = quoteA.id;
+    const B = quoteB.id;
     if (ascending) {
-      return quoteA.id > quoteB.id ? 1 : -1;
+      return A - B;
     } else {
-      return quoteA.id < quoteB.id ? 1 : -1;
+      return B - A;
     }
+    // return quoteA - quoteB;
   });
+
+  return sortedArray;
 };
 
 const QuoteList = (props) => {
@@ -20,15 +38,15 @@ const QuoteList = (props) => {
   const queryParams = new URLSearchParams(location.search);
 
   const isSortingAscending = queryParams.get('sort') === 'asc';
-
-  const sortedQuotes = sortQuotes(props.quotes, isSortingAscending);
+  const { quotes: allQuotes } = props;
+  const sortedQuotes = sortQuotes(allQuotes, isSortingAscending);
+  // console.log(sortedQuotes);
 
   const changeSortingHandler = () => {
     history.push({
       pathname: match.path,
       search: `?sort=${isSortingAscending ? 'desc' : 'asc'}`,
     });
-    // history.push(`${match.url}?sort=${isSortingAscending ? 'desc' : 'asc'}`);
   };
   return (
     <Fragment>

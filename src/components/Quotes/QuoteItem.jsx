@@ -8,8 +8,11 @@ const QuoteItem = (props) => {
           <p>{props.text}</p>
         </blockquote>
         <figcaption>{props.author}</figcaption>
+        <figcaption>{props.id}</figcaption>
       </figure>
-      <FullScreenLink to={`/quotes/${props.id}`} >View Fullscreen</FullScreenLink>
+      <FullScreenLink to={`/quotes/${props.id}`}>
+        View Fullscreen
+      </FullScreenLink>
     </QuoteItemLi>
   );
 };
