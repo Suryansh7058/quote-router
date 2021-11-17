@@ -12,9 +12,11 @@ const QuoteDetail = () => {
   const match = useRouteMatch();
   const allQuotes = useSelector((state) => state.quotes.quotes);
   const quote = allQuotes.slice().find((quote) => quote.id === +params.quoteId);
+  console.log(quote);
 
-  if (!quote) {
-    history.push('*');
+  if (quote === undefined) {
+    history.push('/*');
+    return <p>Not Found</p>;
   }
   return (
     <>

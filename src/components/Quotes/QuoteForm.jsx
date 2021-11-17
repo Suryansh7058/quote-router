@@ -4,10 +4,10 @@ import { Card } from '../UI/Card.styled';
 import { Button } from '../UI/Buttons.styled';
 import { LoadingSpinner } from '../UI/LoadingSpinner.styled';
 import { Prompt } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 const QuoteForm = (props) => {
   const [formFocus, setFormFocus] = useState(false);
-
+  const isLoading = useSelector((state) => state.ui.isLoading);
   const authorInputRef = useRef();
   const textInputRef = useRef();
 
@@ -36,7 +36,7 @@ const QuoteForm = (props) => {
       />
       <Card>
         <Form onFocus={onFocusChangeHandler} onSubmit={submitFormHandler}>
-          {props.isLoading && (
+          {isLoading && (
             <Loading>
               <LoadingSpinner />
             </Loading>

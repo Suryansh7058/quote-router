@@ -1,7 +1,7 @@
 import { quoteActions } from './quote-slice';
+import { uiActions } from './ui-slice';
 import axios from 'axios';
 
-//update quote list using reducers and then send the data whenever quotelist changes from App.js using useSelector
 
 export const sendQuotes = (quotes, totalQuotes) => {
   return async (dispatch) => {
@@ -9,6 +9,7 @@ export const sendQuotes = (quotes, totalQuotes) => {
       if (totalQuotes === 0 || totalQuotes === undefined) {
         return;
       }
+      dispatch(uiActions.setIsLoading());
 
       try {
         await axios.put(
@@ -21,6 +22,7 @@ export const sendQuotes = (quotes, totalQuotes) => {
       } catch (error) {
         console.log(error);
       }
+      dispatch(uiActions.setStopLoading());
     };
     sendQuoteData();
   };
