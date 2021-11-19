@@ -40,7 +40,7 @@ const QuoteForm = (props) => {
             <Loading>
               <LoadingSpinner />
             </Loading>
-          )}
+          ) }
 
           <Control>
             <label htmlFor="author">Author</label>

@@ -9,7 +9,7 @@ export const NoQuotes = styled.div`
   flex-direction: column;
   align-items: center;
 
-  & p {
+  & h1 {
     color: #262c2c;
     font-size: 3rem;
     font-weight: bold;
