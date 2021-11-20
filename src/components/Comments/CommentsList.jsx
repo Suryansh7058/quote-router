@@ -3,8 +3,8 @@ import { CommentsListUl } from './CommentsList.styled';
 const CommentsList = (props) => {
   return (
     <CommentsListUl>
-      {props.comments.map((comment) => (
-        <CommentItem key={comment.id} text={comment.text} />
+      {props.comments.map((comment, index) => (
+        <CommentItem key={index} text={comment} />
       ))}
     </CommentsListUl>
   );

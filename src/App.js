@@ -1,6 +1,7 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useEffect } from 'react';
 import { sendQuotes, getQuotes } from './store/quote-actions';
+import { sendComments, getComments } from './store/comment-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import AllQuotes from './pages/AllQuotes';
 import NewQuote from './pages/NewQuote';
@@ -11,15 +12,19 @@ const App = () => {
   const dispatch = useDispatch();
   const quotes = useSelector((state) => state.quotes.quotes);
   const totalQuotes = useSelector((state) => state.quotes.totalQuotes);
-
+  const allComments = useSelector((state) => state.comments.allComments);
   useEffect(() => {
     dispatch(getQuotes());
+    dispatch(getComments());
   }, [dispatch]);
 
   useEffect(() => {
     dispatch(sendQuotes(quotes, totalQuotes));
   }, [quotes, totalQuotes, dispatch]);
 
+  useEffect(() => {
+    dispatch(sendComments(allComments));
+  }, [dispatch, allComments]);
   return (
     <Layout>
       <Switch>

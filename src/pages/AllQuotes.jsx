@@ -2,19 +2,25 @@ import React from 'react';
 import QuoteList from '../components/Quotes/QuoteList';
 import { useSelector } from 'react-redux';
 import NotFound from './NotFound';
-const DUMMY_QUOTES = [
-  { id: 'q1', author: 'Suryansh', text: 'Learning React is fun!' },
-  { id: 'q2', author: 'Suryansh Singh', text: 'Learning React is great!' },
-];
+import { LoadingSpinner } from '../components/UI/LoadingSpinner.styled';
 const AllQuotes = () => {
   let quotes = useSelector((state) => state.quotes.quotes);
+  const isLoading = useSelector((state) => state.ui.isLoading);
+  // const error = useSelector((state) => state.ui.error);
+
   let totalQuotes = useSelector((state) => state.quotes.totalQuotes);
-  if (totalQuotes === 0 || totalQuotes === undefined) {
+
+  if (!isLoading && (totalQuotes === 0 || totalQuotes === undefined)) {
     return <NotFound zero={true} />;
   }
   return (
     <div>
-      <QuoteList quotes={quotes} />
+      {isLoading && (
+        <div className="centered">
+          <LoadingSpinner />
+        </div>
+      )}
+      {!isLoading && <QuoteList quotes={quotes} />}
     </div>
   );
 };

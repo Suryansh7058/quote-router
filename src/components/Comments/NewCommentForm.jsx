@@ -1,16 +1,27 @@
 import { useRef } from 'react';
 import { Form, Controls, Actions } from './NewCommentForm.styled';
 import { Button } from '../UI/Buttons.styled';
+import { useDispatch } from 'react-redux';
+import { commentActions } from '../../store/comment-slice';
 
 const NewCommentForm = (props) => {
   const commentTextRef = useRef();
-
+  const dispatch = useDispatch();
+  console.log(props.quoteId);
   const submitFormHandler = (event) => {
     event.preventDefault();
-
-    // optional: Could validate here
-
-    // send comment to server
+    if (commentTextRef.current.value.trim().length === 0) {
+      props.hideForm();
+      return;
+    }
+    dispatch(
+      commentActions.addComment({
+        quoteId: props.quoteId,
+        comment: commentTextRef.current.value,
+      })
+    );
+    commentTextRef.current.value = '';
+    props.hideForm();
   };
 
   return (

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card } from '../components/UI/Card.styled';
 import { StyledLink } from '../NavLink';
 import { NoQuotes } from '../components/Quotes/NoQuotesFound.styled';
 const NotFound = (props) => {

@@ -2,7 +2,6 @@ import { quoteActions } from './quote-slice';
 import { uiActions } from './ui-slice';
 import axios from 'axios';
 
-
 export const sendQuotes = (quotes, totalQuotes) => {
   return async (dispatch) => {
     const sendQuoteData = async () => {
@@ -31,6 +30,7 @@ export const sendQuotes = (quotes, totalQuotes) => {
 export const getQuotes = () => {
   return async (dispatch) => {
     (async () => {
+      dispatch(uiActions.setIsLoading());
       try {
         const response = await axios.get(
           'https://quotes-192d5-default-rtdb.firebaseio.com/quotes.json'
@@ -43,8 +43,9 @@ export const getQuotes = () => {
           })
         );
       } catch (error) {
-        //pass
+        dispatch(uiActions.setError({ error: true }));
       }
+      dispatch(uiActions.setStopLoading());
     })();
   };
 };

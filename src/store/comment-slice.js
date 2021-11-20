@@ -23,8 +23,9 @@ const commentSlice = createSlice({
         });
       }
     },
-    getComments(state, action) {
-      state.allComments = action.payload.comments;
+    //TODO: Add comment-actions to make http request
+    setComments(state, action) {
+      state.allComments = action.payload.allComments;
     },
   },
 });

@@ -7,12 +7,10 @@ import { useSelector } from 'react-redux';
 
 const QuoteDetail = () => {
   const params = useParams();
-  console.log(params);
   const history = useHistory();
   const match = useRouteMatch();
   const allQuotes = useSelector((state) => state.quotes.quotes);
   const quote = allQuotes.slice().find((quote) => quote.id === +params.quoteId);
-  console.log(quote);
 
   if (quote === undefined) {
     history.push('/*');
@@ -29,7 +27,7 @@ const QuoteDetail = () => {
         </div>
       </Route>
       <Route path={`${match.path}/comments`}>
-        <Comments />
+        <Comments quoteId={params.quoteId} />
       </Route>
     </>
   );
